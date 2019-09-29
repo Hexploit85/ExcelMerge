@@ -10,19 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/poi-4.1.0" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="file://$USER_HOME$/Desktop/poi-4.1.0/docs/apidocs/dev" />
-        </JAVADOC>
-        <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/Desktop/poi-4.1.0" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/aspose-cells-7.0.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/xmlbeans-3.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -31,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/commons-collections4-4.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/poi-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -49,7 +37,61 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/xmlbeans-3.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/commons-collections4-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-excelant-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-schemas-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-scratchpad-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

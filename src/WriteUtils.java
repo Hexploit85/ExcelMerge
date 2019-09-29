@@ -1,22 +1,20 @@
+
+
+
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * source: https://coderanch.com/t/420958/open-source/Copying-sheet-excel-file-excel
- * @author jk
- * getted from http://jxls.cvs.sourceforge.net/jxls/jxls/src/java/org/jxls/util/Util.java?revision=1.8&view=markup
- * by Leonid Vysochyn
- * and modified (adding styles copying)
- * modified by Philipp Löpmeier (replacing deprecated classes and methods, using generic types)
- * modified by a.filipchik (xlsx support & optimizations)
- */
+
+
+
 public final class WriteUtils {
 
     public static void copyHSSFSheets(HSSFWorkbook sourceWB, HSSFWorkbook destinationWB) {
@@ -372,20 +370,32 @@ public final class WriteUtils {
         return !mergedRegions.contains(newMergedRegion.formatAsString());
     }
 
+
+
     public static void main(String[] args) throws IOException {
 
         XSSFWorkbook dupadon;
         XSSFWorkbook dupatron;
+        FileFilter filter = new ExcelFileFilter();
 
-        dupadon = new XSSFWorkbook("C:\\Excel\\Book1.xlsx");
-        dupatron = new XSSFWorkbook("C:\\Excel\\Book2.xlsx");
+        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month");
+        File[] listOfFiles = folder.listFiles();
 
-        copyXSSFSheets(dupadon,dupatron);
+        for(File file : listOfFiles){
+            System.out.println(file);
+        }
 
-        
 
-        FileOutputStream out = new FileOutputStream(new File("C:\\Excel\\nowy.xlsx"));
-        dupatron.write(out);
+
+//        dupadon = new XSSFWorkbook("C:\\Excel\\Book1.xlsx");
+//        dupatron = new XSSFWorkbook("C:\\Excel\\Book2.xlsx");
+//
+//        copyXSSFSheets(dupadon,dupatron);
+//
+//
+//
+//        FileOutputStream out = new FileOutputStream(new File("C:\\Excel\\nowy.xlsx"));
+//        dupatron.write(out);
 
 
 
