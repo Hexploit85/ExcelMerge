@@ -6,10 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 
@@ -374,28 +371,50 @@ public final class WriteUtils {
 
     public static void main(String[] args) throws IOException {
 
-        XSSFWorkbook dupadon;
-        XSSFWorkbook dupatron;
-        FileFilter filter = new ExcelFileFilter();
 
-        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month");
+
+//        FileFilter filter = new ExcelFileFilter();
+//
+        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month\\New folder");
         File[] listOfFiles = folder.listFiles();
+        XSSFWorkbook dupadon = null;
+        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\BAM This Month\\New folder\\Dupa1.xlsx"));
 
-        for(File file : listOfFiles){
-            System.out.println(file);
+
+        for(int i = 0; i < listOfFiles.length-1; i++){
+            dupadon = new XSSFWorkbook(new FileInputStream(listOfFiles[i]));
+            copyXSSFSheets(dupadon,dupatron);
         }
 
 
+//        System.out.println("issue0");
+//
+//        XSSFWorkbook dupadon = new XSSFWorkbook(new FileInputStream(listOfFiles[0]));
+//
+        String zapisz = "C:\\Excel\\nowy.xlsx";
+        FileOutputStream out = new FileOutputStream(zapisz);
+//
+//        System.out.println("issue1");
+//
+        dupatron.write(out);
+//
+//        System.out.println("issue2");
 
-//        dupadon = new XSSFWorkbook("C:\\Excel\\Book1.xlsx");
-//        dupatron = new XSSFWorkbook("C:\\Excel\\Book2.xlsx");
+
+//        XSSFWorkbook dupadon = new XSSFWorkbook("C:\\Users\\A677850\\Desktop\\BAM This Month\\Dupa1.xlsx");
+//        XSSFWorkbook dupatron = new XSSFWorkbook("C:\\Users\\A677850\\Desktop\\BAM This Month\\Dupa2.xlsx");
 //
 //        copyXSSFSheets(dupadon,dupatron);
 //
+//        String zapisz = "C:\\Excel\\nowy.xlsx";
+//       FileOutputStream out = new FileOutputStream(zapisz);
 //
-//
-//        FileOutputStream out = new FileOutputStream(new File("C:\\Excel\\nowy.xlsx"));
-//        dupatron.write(out);
+//       dupatron.write(out);
+
+
+
+
+
 
 
 
