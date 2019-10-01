@@ -125,17 +125,23 @@ public final class WriteUtils {
             XSSFSheet sheet = (XSSFSheet) it.next();
             String sheetName = sheet.getSheetName();
             System.out.println(sheetName);
+            System.out.println("Tutaj");
             if (destinationWB.getSheetIndex(sheetName) != -1) {
                 int index = 1;
+                System.out.println("LOL");
                 while (destinationWB.getSheetIndex(sheetName + "(" + index + ")") != -1) {
                     index++;
+                    System.out.println("LOL1");
                 }
                 sheetName += "(" + index + ")";
             }
             XSSFSheet newSheet = destinationWB.createSheet(sheetName);
+            System.out.println("Halo");
             System.out.println(newSheet);
             copySheetSettings(newSheet, sheet);
+            System.out.println("halo1");
             copyXSSFSheet(newSheet, sheet);
+            System.out.println("halo2");
             copyPictures(newSheet, sheet);
         }
     }
@@ -210,11 +216,18 @@ public final class WriteUtils {
         // manage a list of merged zone in order to not insert two times a merged zone
         Set<String> mergedRegions = new TreeSet<>();
         List<CellRangeAddress> sheetMergedRegions = sheet.getMergedRegions();
+        System.out.println("Debug1");
         for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
             XSSFRow srcRow = sheet.getRow(i);
+            //...
+            System.out.println("POKEMON = "+sheet.getSheetName());
+            System.out.println("srcRow = "+srcRow );
+            //...
             XSSFRow destRow = newSheet.createRow(i);
+            System.out.println("Debug2");
             if (srcRow != null) {
                 //BaseUtils.systemLogger.info("copy row " + i);
+                System.out.println("Debug3");
                 WriteUtils.copyXSSFRow(newSheet, srcRow, destRow, styleMap, sheetMergedRegions, mergedRegions);
                 if (srcRow.getLastCellNum() > maxColumnNum) {
                     maxColumnNum = srcRow.getLastCellNum();
@@ -230,9 +243,13 @@ public final class WriteUtils {
 
     public static void copyXSSFRow(XSSFSheet destSheet, XSSFRow srcRow, XSSFRow destRow, Map<Integer, XSSFCellStyle> styleMap, List<CellRangeAddress> sheetMergedRegions, Set<String> mergedRegions) {
         destRow.setHeight(srcRow.getHeight());
+
         // pour chaque row
         for (int j = srcRow.getFirstCellNum(); j <= srcRow.getLastCellNum(); j++) {
+            System.out.println("bitch");
+            System.out.println(j);
             XSSFCell oldCell = srcRow.getCell(j);   // ancienne cell
+            System.out.println("wha");
             XSSFCell newCell = destRow.getCell(j);  // new cell
             if (oldCell != null) {
                 if (newCell == null) {
@@ -375,42 +392,29 @@ public final class WriteUtils {
 
 //        FileFilter filter = new ExcelFileFilter();
 //
-        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month\\New folder");
+        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month");
         File[] listOfFiles = folder.listFiles();
+
+
+
         XSSFWorkbook dupadon = null;
-        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\BAM This Month\\New folder\\Dupa1.xlsx"));
+        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\New Folder\\Work.xlsx"));
+
+      //  System.out.println(dupatron.getSheetName(0));
+        //System.out.println(dupatron.getSheetIndex("Tabelle1"));
 
 
-        for(int i = 0; i < listOfFiles.length-1; i++){
+        for(int i = 0; i < listOfFiles.length ; i++){
             dupadon = new XSSFWorkbook(new FileInputStream(listOfFiles[i]));
+            System.out.println(listOfFiles[i]);
             copyXSSFSheets(dupadon,dupatron);
         }
 
+        System.out.println("Sie dzieje");
 
-//        System.out.println("issue0");
-//
-//        XSSFWorkbook dupadon = new XSSFWorkbook(new FileInputStream(listOfFiles[0]));
-//
         String zapisz = "C:\\Excel\\nowy.xlsx";
         FileOutputStream out = new FileOutputStream(zapisz);
-//
-//        System.out.println("issue1");
-//
         dupatron.write(out);
-//
-//        System.out.println("issue2");
-
-
-//        XSSFWorkbook dupadon = new XSSFWorkbook("C:\\Users\\A677850\\Desktop\\BAM This Month\\Dupa1.xlsx");
-//        XSSFWorkbook dupatron = new XSSFWorkbook("C:\\Users\\A677850\\Desktop\\BAM This Month\\Dupa2.xlsx");
-//
-//        copyXSSFSheets(dupadon,dupatron);
-//
-//        String zapisz = "C:\\Excel\\nowy.xlsx";
-//       FileOutputStream out = new FileOutputStream(zapisz);
-//
-//       dupatron.write(out);
-
 
 
 
