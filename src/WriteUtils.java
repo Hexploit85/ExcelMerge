@@ -2,6 +2,7 @@
 
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
@@ -387,43 +388,72 @@ public final class WriteUtils {
 
 
     public static void main(String[] args) throws IOException {
-
-
-
-//        FileFilter filter = new ExcelFileFilter();
 //
-        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM This Month");
+//        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\BAM last month\\Pending system restart.xlsx"));
+//        //XSSFWorkbook dupadon = null;
+//        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\New Folder\\Work.xlsx"));
+//
+//
+//
+//        XSSFSheet sheet = workbook.getSheetAt(0);
+//
+//        Row row1 = sheet.getRow(0);
+//        Row row2 = sheet.getRow(1);
+//        Row row3 = sheet.getRow(2);
+//        Row row4 = sheet.getRow(3);
+//
+//        sheet.removeRow(row1);
+//        sheet.removeRow(row2);
+//        sheet.removeRow(row3);
+//        sheet.removeRow(row4);
+//
+//        copyXSSFSheets(workbook,dupatron);
+//
+//
+//        FileOutputStream out = new FileOutputStream("C:\\Users\\A677850\\Desktop\\New folder\\Output.xlsx");
+//        workbook.write(out);
+//    }}
+
+
+        /////////////////////Working Block//////////////////////////////////
+        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM last month");
+        ExcelFileFilter filter = new ExcelFileFilter();
+
         File[] listOfFiles = folder.listFiles();
-
-
+        File[] justFileNames = folder.listFiles(filter);
 
         XSSFWorkbook dupadon = null;
         XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\New Folder\\Work.xlsx"));
 
-      //  System.out.println(dupatron.getSheetName(0));
-        //System.out.println(dupatron.getSheetIndex("Tabelle1"));
 
-
+        //Loop going thru source Workbooks and saving in one destination Workbook
         for(int i = 0; i < listOfFiles.length ; i++){
             dupadon = new XSSFWorkbook(new FileInputStream(listOfFiles[i]));
-            System.out.println(listOfFiles[i]);
+            String nazwa = justFileNames[i].getName();
+
+            dupadon.setSheetName(0,nazwa);
+            XSSFSheet sheet = dupadon.getSheetAt(0);
+
+            Row row1 = sheet.getRow(0);
+            Row row2 = sheet.getRow(1);
+            Row row3 = sheet.getRow(2);
+            Row row4 = sheet.getRow(3);
+
+            sheet.removeRow(row4);
+
             copyXSSFSheets(dupadon,dupatron);
+
+
+        }
+        for(int i =0; i < dupatron.getNumberOfSheets();i++){
+            System.out.println(dupatron.getSheetName(i));
         }
 
-        System.out.println("Sie dzieje");
+        dupatron.removeSheetAt(0);
+        dupatron.setSheetOrder("Overall.xlsx",0);
 
         String zapisz = "C:\\Excel\\nowy.xlsx";
         FileOutputStream out = new FileOutputStream(zapisz);
         dupatron.write(out);
 
-
-
-
-
-
-
-
-
-
-    }
-}
+   }}
