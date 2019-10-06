@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.*;
@@ -14,6 +15,10 @@ import java.util.*;
 
 
 public final class WriteUtils {
+
+    public static double Compliant;
+
+    public static double NonCompliant;
 
     public static void copyHSSFSheets(HSSFWorkbook sourceWB, HSSFWorkbook destinationWB) {
         for (Iterator<Sheet> it = sourceWB.sheetIterator(); it.hasNext(); ) {
@@ -126,23 +131,23 @@ public final class WriteUtils {
             XSSFSheet sheet = (XSSFSheet) it.next();
             String sheetName = sheet.getSheetName();
             System.out.println(sheetName);
-            System.out.println("Tutaj");
+
             if (destinationWB.getSheetIndex(sheetName) != -1) {
                 int index = 1;
-                System.out.println("LOL");
+
                 while (destinationWB.getSheetIndex(sheetName + "(" + index + ")") != -1) {
                     index++;
-                    System.out.println("LOL1");
+
                 }
                 sheetName += "(" + index + ")";
             }
             XSSFSheet newSheet = destinationWB.createSheet(sheetName);
-            System.out.println("Halo");
+
             System.out.println(newSheet);
             copySheetSettings(newSheet, sheet);
-            System.out.println("halo1");
+
             copyXSSFSheet(newSheet, sheet);
-            System.out.println("halo2");
+
             copyPictures(newSheet, sheet);
         }
     }
@@ -217,18 +222,14 @@ public final class WriteUtils {
         // manage a list of merged zone in order to not insert two times a merged zone
         Set<String> mergedRegions = new TreeSet<>();
         List<CellRangeAddress> sheetMergedRegions = sheet.getMergedRegions();
-        System.out.println("Debug1");
+
         for (int i = sheet.getFirstRowNum(); i <= sheet.getLastRowNum(); i++) {
             XSSFRow srcRow = sheet.getRow(i);
-            //...
-            System.out.println("POKEMON = "+sheet.getSheetName());
-            System.out.println("srcRow = "+srcRow );
-            //...
             XSSFRow destRow = newSheet.createRow(i);
-            System.out.println("Debug2");
+
             if (srcRow != null) {
                 //BaseUtils.systemLogger.info("copy row " + i);
-                System.out.println("Debug3");
+
                 WriteUtils.copyXSSFRow(newSheet, srcRow, destRow, styleMap, sheetMergedRegions, mergedRegions);
                 if (srcRow.getLastCellNum() > maxColumnNum) {
                     maxColumnNum = srcRow.getLastCellNum();
@@ -247,11 +248,15 @@ public final class WriteUtils {
 
         // pour chaque row
         for (int j = srcRow.getFirstCellNum(); j <= srcRow.getLastCellNum(); j++) {
-            System.out.println("bitch");
-            System.out.println(j);
+           // System.out.println("Index kolumny = "+j);
+
+
             XSSFCell oldCell = srcRow.getCell(j);   // ancienne cell
-            System.out.println("wha");
             XSSFCell newCell = destRow.getCell(j);  // new cell
+            try{
+            System.out.println(oldCell.getAddress().toString());}catch (NullPointerException NPE){
+                System.out.println("NULL");
+            }
             if (oldCell != null) {
                 if (newCell == null) {
                     newCell = destRow.createCell(j);
@@ -385,34 +390,50 @@ public final class WriteUtils {
         return !mergedRegions.contains(newMergedRegion.formatAsString());
     }
 
+    public static void checkCompliance(String cell, Double cellValue){
 
 
-    public static void main(String[] args) throws IOException {
-//
-//        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\BAM last month\\Pending system restart.xlsx"));
-//        //XSSFWorkbook dupadon = null;
-//        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\New Folder\\Work.xlsx"));
-//
-//
-//
-//        XSSFSheet sheet = workbook.getSheetAt(0);
-//
-//        Row row1 = sheet.getRow(0);
-//        Row row2 = sheet.getRow(1);
-//        Row row3 = sheet.getRow(2);
-//        Row row4 = sheet.getRow(3);
-//
-//        sheet.removeRow(row1);
-//        sheet.removeRow(row2);
-//        sheet.removeRow(row3);
-//        sheet.removeRow(row4);
-//
-//        copyXSSFSheets(workbook,dupatron);
-//
-//
-//        FileOutputStream out = new FileOutputStream("C:\\Users\\A677850\\Desktop\\New folder\\Output.xlsx");
-//        workbook.write(out);
-//    }}
+
+        if(cell.equals("Compliant") || cell.equals("Pending system restart") || cell.equals("Successfully installed update(s)")){
+
+            Compliant = Compliant+cellValue;
+            System.out.println(Compliant);
+
+        }else if(cell.equals("Downloaded update(s)") ||cell.equals("Downloading update(s)") ||cell.equals("Failed to download update(s)") ||cell.equals("Failed to install update(s)") ||cell.equals("Non-compliant") ||cell.equals("Installing updates(s)") ||cell.equals("Waiting for another installation to complete")){
+
+            NonCompliant = NonCompliant+cellValue;
+            System.out.println(NonCompliant);
+        }
+
+    }
+
+    public static String createStringFromCell(XSSFWorkbook workbook, int row, int column) {
+
+        String cell ="";
+
+        if (workbook.getSheetAt(0).getRow(row).getCell(column) != null) {
+
+            cell = workbook.getSheetAt(0).getRow(row).getCell(column).getStringCellValue();
+
+            System.out.println("Cellname > "+cell);
+
+        }
+        return cell;
+    }
+
+    public static Double createDoubleFromCell(XSSFWorkbook workbook, int row, int column) {
+
+        Double cell =0.0;
+
+        if (workbook.getSheetAt(0).getRow(row).getCell(column) != null) {
+
+            cell = workbook.getSheetAt(0).getRow(row).getCell(column).getNumericCellValue();
+
+        }return cell;
+    }
+
+    public static void main(String[] args) throws IOException  {
+
 
 
         /////////////////////Working Block//////////////////////////////////
@@ -434,12 +455,19 @@ public final class WriteUtils {
             dupadon.setSheetName(0,nazwa);
             XSSFSheet sheet = dupadon.getSheetAt(0);
 
-            Row row1 = sheet.getRow(0);
-            Row row2 = sheet.getRow(1);
-            Row row3 = sheet.getRow(2);
-            Row row4 = sheet.getRow(3);
 
+            Row row4 = sheet.getRow(3);
+            int hopefulyLast = sheet.getLastRowNum();
+            Row lastrow = sheet.getRow(hopefulyLast);
+
+
+            try{
             sheet.removeRow(row4);
+            sheet.removeRow(lastrow);
+           // sheet.removeRow(lastrow2);
+            }catch (NullPointerException HWDP){
+                System.out.println("HWDP");
+            }
 
             copyXSSFSheets(dupadon,dupatron);
 
@@ -451,6 +479,58 @@ public final class WriteUtils {
 
         dupatron.removeSheetAt(0);
         dupatron.setSheetOrder("Overall.xlsx",0);
+
+
+
+        String F7 = createStringFromCell(dupatron,6,5);
+        String F8 = createStringFromCell(dupatron,7,5);
+        String F9 = createStringFromCell(dupatron,8,5);
+        String F10 = createStringFromCell(dupatron,9,5);
+        System.out.println("mark1 = " + F10);
+        dupatron.getSheetAt(0).getRow(10).getCell(5).setCellValue("placeholder");
+        String F11 = createStringFromCell(dupatron,10,5);
+        System.out.println("mark2 = " + F11);
+        String F12 = createStringFromCell(dupatron,11,5);
+        String F13 = createStringFromCell(dupatron,12,5);
+        String F14 = createStringFromCell(dupatron,13,5);
+        String F15 = createStringFromCell(dupatron,14,5);
+        String F16 = createStringFromCell(dupatron,15,5);
+        String F17 = createStringFromCell(dupatron,16,5);
+
+
+
+
+        double F7Value = createDoubleFromCell(dupatron,6,6);
+        double F8Value = createDoubleFromCell(dupatron,7,6);
+        double F9Value = createDoubleFromCell(dupatron,8,6);
+        double F10Value = createDoubleFromCell(dupatron,9,6);
+        double F11Value = createDoubleFromCell(dupatron,10,6);
+        double F12Value = createDoubleFromCell(dupatron,11,6);
+        double F13Value = createDoubleFromCell(dupatron,12,6);
+        double F14Value = createDoubleFromCell(dupatron,13,6);
+        double F15Value = createDoubleFromCell(dupatron,14,6);
+        double F16Value = createDoubleFromCell(dupatron,15,6);
+        double F17Value = createDoubleFromCell(dupatron,16,6);
+
+
+        System.out.println(F7 + F7Value + F8 + F8Value + F9 + F9Value + F10 + F10Value + F11 + F11Value + F12 + F12Value);
+
+
+            checkCompliance(F7, F7Value);
+            checkCompliance(F8, F8Value);
+            checkCompliance(F9, F9Value);
+            checkCompliance(F10, F10Value);
+            checkCompliance(F11, F11Value);
+            checkCompliance(F12, F12Value);
+            checkCompliance(F13, F13Value);
+            checkCompliance(F14, F14Value);
+            checkCompliance(F15, F15Value);
+            checkCompliance(F16, F16Value);
+           checkCompliance(F17, F17Value);
+
+        System.out.println(Compliant + " " + NonCompliant);
+
+
 
         String zapisz = "C:\\Excel\\nowy.xlsx";
         FileOutputStream out = new FileOutputStream(zapisz);
