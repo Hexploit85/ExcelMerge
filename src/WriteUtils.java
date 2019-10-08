@@ -444,7 +444,7 @@ public final class WriteUtils {
         File[] justFileNames = folder.listFiles(filter);
 
         XSSFWorkbook dupadon = null;
-        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream("C:\\Users\\A677850\\Desktop\\New Folder\\Work.xlsx"));
+        XSSFWorkbook dupatron = new XSSFWorkbook(new FileInputStream(".\\Work.xlsx"));
 
 
         //Loop going thru source Workbooks and saving in one destination Workbook
@@ -479,6 +479,17 @@ public final class WriteUtils {
 
         dupatron.removeSheetAt(0);
         dupatron.setSheetOrder("Overall.xlsx",0);
+        int lastRow = dupatron.getSheetAt(0).getLastRowNum();
+        dupatron.getSheetAt(0).createRow(lastRow+1);
+        dupatron.getSheetAt(0).createRow(lastRow+2);
+        dupatron.getSheetAt(0).createRow(lastRow+3);
+        dupatron.getSheetAt(0).createRow(lastRow+4);
+        dupatron.getSheetAt(0).createRow(lastRow+5);
+        dupatron.getSheetAt(0).createRow(lastRow+6);
+        dupatron.getSheetAt(0).createRow(lastRow+7);
+        dupatron.getSheetAt(0).createRow(lastRow+8);
+        dupatron.getSheetAt(0).createRow(lastRow+9);
+        dupatron.getSheetAt(0).createRow(lastRow+10);
 
 
 
@@ -486,10 +497,7 @@ public final class WriteUtils {
         String F8 = createStringFromCell(dupatron,7,5);
         String F9 = createStringFromCell(dupatron,8,5);
         String F10 = createStringFromCell(dupatron,9,5);
-        System.out.println("mark1 = " + F10);
-        dupatron.getSheetAt(0).getRow(10).getCell(5).setCellValue("placeholder");
         String F11 = createStringFromCell(dupatron,10,5);
-        System.out.println("mark2 = " + F11);
         String F12 = createStringFromCell(dupatron,11,5);
         String F13 = createStringFromCell(dupatron,12,5);
         String F14 = createStringFromCell(dupatron,13,5);
@@ -513,7 +521,7 @@ public final class WriteUtils {
         double F17Value = createDoubleFromCell(dupatron,16,6);
 
 
-        System.out.println(F7 + F7Value + F8 + F8Value + F9 + F9Value + F10 + F10Value + F11 + F11Value + F12 + F12Value);
+        //System.out.println(F7 + F7Value + F8 + F8Value + F9 + F9Value + F10 + F10Value + F11 + F11Value + F12 + F12Value+F13+F14+F15+F16+F17);
 
 
             checkCompliance(F7, F7Value);
@@ -530,9 +538,28 @@ public final class WriteUtils {
 
         System.out.println(Compliant + " " + NonCompliant);
 
+        dupatron.getSheetAt(0).getRow(19).createCell(5);
+        dupatron.getSheetAt(0).getRow(19).getCell(5).setCellValue("Compliant");
+        dupatron.getSheetAt(0).getRow(20).createCell(5);
+        dupatron.getSheetAt(0).getRow(20).getCell(5).setCellValue("Non-Compliant");
+        dupatron.getSheetAt(0).getRow(21).createCell(5);
+        dupatron.getSheetAt(0).getRow(21).getCell(5).setCellValue("Overall");
+        dupatron.getSheetAt(0).getRow(19).createCell(6);
+        dupatron.getSheetAt(0).getRow(19).getCell(6).setCellValue(Compliant);
+        dupatron.getSheetAt(0).getRow(20).createCell(6);
+        dupatron.getSheetAt(0).getRow(20).getCell(6).setCellValue(NonCompliant);
+        dupatron.getSheetAt(0).getRow(21).createCell(6);
+        dupatron.getSheetAt(0).getRow(21).getCell(6).setCellValue(Compliant/(Compliant+NonCompliant));
 
 
-        String zapisz = "C:\\Excel\\nowy.xlsx";
+        CellStyle style = dupatron.createCellStyle();
+        style.setDataFormat(dupatron.createDataFormat().getFormat("0.00%"));
+        dupatron.getSheetAt(0).getRow(21).getCell(6).setCellStyle(style);
+        dupatron.setActiveSheet(0);
+
+
+
+        String zapisz = "C:\\Users\\A677850\\Desktop\\nowy.xlsx";
         FileOutputStream out = new FileOutputStream(zapisz);
         dupatron.write(out);
 
