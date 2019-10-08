@@ -3,16 +3,25 @@
     <output-path>$PROJECT_DIR$/out/artifacts/untitled_jar</output-path>
     <root id="archive" name="untitled.jar">
       <element id="module-output" name="untitled" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/xmlbeans-3.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-collections4-4.4/commons-collections4-4.4-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-collections4-4.4/commons-collections4-4.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-excelant-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-schemas-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-collections4-4.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-scratchpad-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-compress-1.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-4.1.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/xmlbeans-3.1.0/lib/resolver.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/xmlbeans-3.1.0/lib/xmlbeans-3.1.0-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/xmlbeans-3.1.0/lib/xmlbeans-3.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-scratchpad-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-schemas-4.1.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-schemas-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-excelant-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-compress-1.19-bin/commons-compress-1.19/commons-compress-1.19-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-compress-1.19-bin/commons-compress-1.19/commons-compress-1.19.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/poi-bin-4.1.0-20190412/poi-4.1.0/poi-scratchpad-4.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

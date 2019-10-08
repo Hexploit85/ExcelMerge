@@ -143,7 +143,7 @@ public final class WriteUtils {
             }
             XSSFSheet newSheet = destinationWB.createSheet(sheetName);
 
-            System.out.println(newSheet);
+
             copySheetSettings(newSheet, sheet);
 
             copyXSSFSheet(newSheet, sheet);
@@ -254,8 +254,8 @@ public final class WriteUtils {
             XSSFCell oldCell = srcRow.getCell(j);   // ancienne cell
             XSSFCell newCell = destRow.getCell(j);  // new cell
             try{
-            System.out.println(oldCell.getAddress().toString());}catch (NullPointerException NPE){
-                System.out.println("NULL");
+            System.out.print(oldCell.getAddress().toString()+" ");}catch (NullPointerException NPE){
+                System.out.print("\n");
             }
             if (oldCell != null) {
                 if (newCell == null) {
@@ -432,12 +432,30 @@ public final class WriteUtils {
         }return cell;
     }
 
+    public static void showMenu() {
+
+        System.out.println("\n" +
+                "███████╗ ██████╗ ██████╗ ███████╗██╗   ██╗███████╗██████╗     ███╗   ███╗ ██████╗██████╗ \n" +
+                "██╔════╝██╔═══██╗██╔══██╗██╔════╝██║   ██║██╔════╝██╔══██╗    ████╗ ████║██╔════╝██╔══██╗\n" +
+                "█████╗  ██║   ██║██████╔╝█████╗  ██║   ██║█████╗  ██████╔╝    ██╔████╔██║██║     ██║  ██║\n" +
+                "██╔══╝  ██║   ██║██╔══██╗██╔══╝  ╚██╗ ██╔╝██╔══╝  ██╔══██╗    ██║╚██╔╝██║██║     ██║  ██║\n" +
+                "██║     ╚██████╔╝██║  ██║███████╗ ╚████╔╝ ███████╗██║  ██║    ██║ ╚═╝ ██║╚██████╗██████╔╝\n" +
+                "╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝ ╚═════╝╚═════╝ \n" +
+                "                                                                                         \n");
+        System.out.println("By Kamil Sobecki\n");
+    }
     public static void main(String[] args) throws IOException  {
 
+        showMenu();
 
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Podaj lokalizacje plikow:\n");
+//        String sciezka;
 
         /////////////////////Working Block//////////////////////////////////
-        File folder = new File("C:\\Users\\A677850\\Desktop\\BAM last month");
+//        sciezka =scanner.nextLine();
+//        System.out.println(sciezka);
+        File folder = new File(".//Pliki");
         ExcelFileFilter filter = new ExcelFileFilter();
 
         File[] listOfFiles = folder.listFiles();
@@ -490,6 +508,11 @@ public final class WriteUtils {
         dupatron.getSheetAt(0).createRow(lastRow+8);
         dupatron.getSheetAt(0).createRow(lastRow+9);
         dupatron.getSheetAt(0).createRow(lastRow+10);
+        dupatron.getSheetAt(0).createRow(lastRow+11);
+        dupatron.getSheetAt(0).createRow(lastRow+12);
+        dupatron.getSheetAt(0).createRow(lastRow+13);
+        dupatron.getSheetAt(0).createRow(lastRow+14);
+        dupatron.getSheetAt(0).createRow(lastRow+15);
 
 
 
@@ -559,7 +582,7 @@ public final class WriteUtils {
 
 
 
-        String zapisz = "C:\\Users\\A677850\\Desktop\\nowy.xlsx";
+        String zapisz = ".\\Raport.xlsx";
         FileOutputStream out = new FileOutputStream(zapisz);
         dupatron.write(out);
 
